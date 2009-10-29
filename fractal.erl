@@ -2,7 +2,7 @@
 % General operations useful for creating fractals
 %
 -module(fractal).
--export([bounded_iteration/4]).
+-export([bounded_iteration/4, float_seq/3]).
 
 
 %
@@ -26,3 +26,15 @@ bounded_iteration(Value, Fun, Iter, IterLimit, ThresholdFun) ->
         false -> bounded_iteration(Fun(Value), Fun, Iter+1, IterLimit, ThresholdFun)
     end.
 
+
+%
+% Create a sequence of N equally-spaced floats from First to Last
+%
+float_seq(X, Y, N) ->
+    First = lib_misc:min(X, Y),
+    Last = lib_misc:max(X, Y),
+    Step = (Last - First) / (N - 1),
+    float_seq_gen(First, Step, [], N).
+
+float_seq_gen(_Start, _Step, Acc, 0) -> lists:reverse(Acc);
+float_seq_gen(Start, Step, Acc, N) -> float_seq_gen(Start+Step, Step, [Start|Acc], N-1).

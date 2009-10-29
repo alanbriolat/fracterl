@@ -11,7 +11,8 @@ ERL = erl -boot start_clean
 
 
 # Modules to build
-MODS = complex \
+MODS = lib_misc \
+	   complex \
 	   fractal \
 	   mandelbrot \
 
@@ -20,4 +21,5 @@ all: build
 
 build: ${MODS:%=%.beam}
 
-
+clean:
+	rm -f *.beam

@@ -2,7 +2,7 @@
 % Mandelbrot fractal generation
 %
 -module(mandelbrot).
--export([iterate/2, create_fun/1]).
+-export([iterate/2, create_fun/1, create_points/3]).
 
 % Iterate a point for the Mandelbrot set
 iterate(Initial, IterLimit) ->
@@ -14,3 +14,8 @@ iterate(Initial, IterLimit) ->
 % IterLimit doesn't need to passed around).
 create_fun(IterLimit) ->
     fun(X) -> iterate(X, IterLimit) end.
+
+
+create_points({Rmin, Rmax}, {Imin, Imax}, {Rres, Ires}) ->
+    [{R, I} || R <- fractal:float_seq(Rmin, Rmax, Rres),
+               I <- fractal:float_seq(Imin, Imax, Ires)].
