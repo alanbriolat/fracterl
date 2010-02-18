@@ -15,6 +15,7 @@ MODS = lib_misc \
 	   complex \
 	   fractal \
 	   mandelbrot \
+	   worker \
 
 
 all: build
